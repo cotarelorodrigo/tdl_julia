@@ -1,0 +1,1483 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{julia\_}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+\begin{align}  Julia  \end{align}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    http://www.rpi.edu/dept/arc/docs/latex/latex-intro.pdf todo esto se
+puede usar para darle formato al titulo
+
+    
+
+    The JuliaCon academic conference for Julia users and developers has been
+held annually since 2014.
+
+    Usualmente los lenguajes de programacion para computación numerica se
+dividen entre:
+
+\begin{itemize}
+\item
+  Estaticos como C que son rápidos en ejecucion pero lentos en el
+  desarrollo.
+\item
+  Dinámicos como Python que son rápidos en el desarrollo pero lentos en
+  ejecucuion.
+\end{itemize}
+
+Julia busca ofrecer lo mejor de los dos mundos.
+
+Es un lenguaje nuevo, empezó a trabajarse en él en el 2009.
+
+Sus creadores son Jeff Bezanson, Stefan Karpinski, Viral B. Shah y Alan
+Edelman.
+
+La primera versión pública se lanzó en el 2012.
+
+En 2015 se establece Julia computing para proveer soporte y
+entrenamiento pago.
+
+Para Enero del 2018 tenía alrededor de 1.800.000 descargas.
+
+    \section{Para que sirve}\label{para-que-sirve}
+
+    Se trata de un lenguaje cuya concepción inicial tenía como objetivo
+lograr desarrollar un lenguaje que soporte un gran manejo matemático no
+sólo en capacidades computacionales sino también en facilidad y
+versatilidad. Suele utilizarse para para la computación paralela y
+distribuida gracias a su buen diseño y manejo de concurrencia. De la
+misma manera, su capacidad matemática lo hace un lenguaje muy utilizado
+en el ámbito de Machine Learning donde se trabaja con una enorme
+cantidad de datos.
+
+    \section{Caracteristicas basicas del
+lenguaje}\label{caracteristicas-basicas-del-lenguaje}
+
+    Tipos definidos por usuarios son tan rápidos y compctos como los
+Built-ins
+
+Llama funciones C directamente (no se necesitan wrappers ni API's
+especiales)
+
+Dispone de un compilador avanzado, JIT (Just In Time), que tiene como
+objetivo la optimización del código en virtud de una mejora en el tiempo
+de ejecución.
+
+    \subsubsection{Variables}\label{variables}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{miVariable} \PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{miVariable} \PY{o}{=} \PY{n}{miVariable} \PY{o}{+} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{δ} \PY{o}{=} \PY{l+m+mf}{0.00001}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{δ} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{H}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{o}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{a}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Constantes matemáticas}
+        \PY{n+nb}{π}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{miVariable} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb}{π} \PY{o}{+} \PY{l+m+mf}{0.12}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{miVariable} \PY{o}{=} \PY{n}{miVariable} \PY{o}{+} \PY{n+nb}{Inf}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{miVariable} \PY{o}{=} \PY{n}{miVariable} \PY{o}{+} \PY{o}{\PYZhy{}}\PY{n+nb}{Inf}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} soporte para números irracionales}
+        \PY{n}{res} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{4}\PY{n+nb}{im}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}\PY{n+nb}{im}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{cos}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} A diferencia de otros  lenguajes que soportan el paradigma funcional, Julia permite redefinir no solamente }
+        \PY{c}{\PYZsh{} variables sino también hasta sus propias constantes}
+        \PY{n+nb}{π} \PY{o}{=} \PY{l+m+mf}{3.14}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{tup} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} 
+        \PY{n}{length}\PY{p}{(}\PY{n}{tup}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kp}{in}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{tup}\PY{p}{)} \PY{c}{\PYZsh{} =\PYZgt{} true}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{d}\PY{p}{,} \PY{n+nb}{e}\PY{p}{,} \PY{n}{f} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{e}\PY{p}{,} \PY{n}{d} \PY{o}{=} \PY{n}{d}\PY{p}{,} \PY{n+nb}{e}
+        \PY{n+nb}{e}\PY{p}{,} \PY{n}{d}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} números racionales}
+        \PY{l+m+mi}{1}\PY{o}{//}\PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{float}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{//}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Tipado}\label{tipado}
+
+En Julia los tipados son, por defecto, omitidos de manera tal que las
+variables admitan valores de cualquier tipo. Y esto se da así: son los
+valores los que tienen tipo mientras que las variables son simples
+notaciones que hacen referencia a entidades. De todas formas, es fácil
+expresar el tipo esperado del valor de una cierta variable. Esto suele
+mejorar no solamente la robustez de los programas, sino también su
+performance. En conclusión, Julia es un lenguaje de tipado dinámico pero
+que soporta la especificación de tipos para, en tiempo de ejecución,
+favorecer a cuestiones internas del lenguaje que mejoran su performance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{x} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{S}\PY{l+s}{o}\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{u}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{r}\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{g}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} "Soy un string"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{y}\PY{o}{::}\PY{k+kt}{Int64}
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        TypeError: typeassert: expected Int64, got ASCIIString
+
+        
+
+    \end{Verbatim}
+
+    \subsubsection{Manejo de errores simple}\label{manejo-de-errores-simple}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{tup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c}{\PYZsh{} =\PYZgt{} 1}
+        \PY{k}{try}\PY{o}{:}
+            \PY{n}{tup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{3} \PY{c}{\PYZsh{} MethodError}
+        \PY{k}{catch} \PY{n+nb}{e}
+            \PY{n}{println}\PY{p}{(}\PY{n+nb}{e}\PY{p}{)}
+        \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        UndefVarError: tup not defined
+
+        
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{ampliacion\PYZus{}sqrt}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{=}
+        
+        \PY{n}{x} \PY{o}{\PYZgt{}=} \PY{l+m+mi}{0} \PY{o}{?} \PY{n}{sqrt}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{:} \PY{n}{error}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{V}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{x}\PY{l+s}{ }\PY{l+s}{n}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{v}\PY{l+s}{o}\PY{l+s}{ }\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{v}\PY{l+s}{á}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{d}\PY{l+s}{o}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{ampliacion\PYZus{}sqrt}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} 10.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{ampliacion\PYZus{}sqrt}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        Valor de x negativo es inválido
+
+        
+
+         in ampliacion\_sqrt at ./In[1]:1
+
+    \end{Verbatim}
+
+    \subsubsection{Funciones y argumentos}\label{funciones-y-argumentos}
+
+Los argumentos en Julia se pasan siguiendo una convención que suele
+llamarse "pass-by-sharing". Esto significa que no se pasan por copia,
+sino que los argumentos funcionan en sí mismos como una nueva variable
+que tiene idéntico valor al que ha sido pasado. Así, la modificación de
+variables mutables como Arrays será visible para la función caller (esto
+mismo sucede en Lisps, Python, Ruby entre otros).
+
+https://www.youtube.com/watch?v=1YFss\_4B\_o4
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} 7
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{map}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{function} \PY{n}{foo}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}
+                   \PY{n}{a}\PY{o}{+}\PY{n}{b}\PY{p}{,} \PY{n}{a}\PY{o}{*}\PY{n}{b}
+        \PY{k}{end}
+        \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{foo}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{function} \PY{n}{default}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+            \PY{k}{return} \PY{l+s}{\PYZdq{}}\PY{l+s+si}{\PYZdl{}a}\PY{l+s}{ }\PY{l+s+si}{\PYZdl{}b}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s+si}{\PYZdl{}x}\PY{l+s}{ }\PY{l+s+si}{\PYZdl{}y}\PY{l+s}{\PYZdq{}}
+        \PY{k}{end}
+        
+        \PY{n}{default}\PY{p}{(}\PY{l+s+sc}{\PYZsq{}h\PYZsq{}}\PY{p}{,}\PY{l+s+sc}{\PYZsq{}g\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{default}\PY{p}{(}\PY{l+s+sc}{\PYZsq{}h\PYZsq{}}\PY{p}{,} \PY{l+s+sc}{\PYZsq{}g\PYZsq{}}\PY{p}{,} \PY{l+s+sc}{\PYZsq{}i\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Ducking type}\label{ducking-type}
+
+Quiero mostrar que a julia no le importa el tipo de dato. Julia opera
+con cualquier tipo de dato que tenga sentido
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{f2}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{=} \PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} f2 (generic function with 1 method)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{f2}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} 4
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{Ad} \PY{o}{=} \PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{f2}\PY{p}{(}\PY{n}{Ad}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 3×3 Array\{Float64,2\}:
+         1.23116  0.915372  0.746678
+         1.50719  1.21557   0.948403
+         1.52776  1.18283   1.00988 
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{f2}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{h}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{c}{\PYZsh{}La multiplicacion de este parametro implica una concatenacion}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} "holahola"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{v} \PY{o}{=} \PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{f2}\PY{p}{(}\PY{n}{v}\PY{p}{)} \PY{c}{\PYZsh{}Aca no funcionaria porque la operacion definida en f2 es ambigua. Hay diferentes manera de multiplicar un vector}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        DimensionMismatch("Cannot multiply two vectors")
+
+        
+
+        Stacktrace:
+
+         [1] power\_by\_squaring(::Array\{Float64,1\}, ::Int64) at ./intfuncs.jl:169
+
+         [2] f2(::Array\{Float64,1\}) at ./In[1]:1
+
+    \end{Verbatim}
+
+    \subsubsection{Funciones mutantes vs no
+mutantes}\label{funciones-mutantes-vs-no-mutantes}
+
+Por convencion las funciones seguidas por un ! alteran, o bien mutan,
+sus contenidos y las que carecen de un ! no lo hacen
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{v} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 3-element Array\{Int64,1\}:
+         4
+         7
+         1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{sort}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 3-element Array\{Int64,1\}:
+         1
+         4
+         7
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{v}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 3-element Array\{Int64,1\}:
+          4
+          7
+          1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{sort!}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 3-element Array\{Int64,1\}:
+          1
+          4
+          7
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{v}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 3-element Array\{Int64,1\}:
+          1
+          4
+          7
+\end{Verbatim}
+            
+    \subsubsection{Broadcasting}\label{broadcasting}
+
+Si ponemos un . entre el nombre de la funcion y su lista de argumento le
+estamos diciendo a la funcion que se aplique sobre cada elemento sobre
+cada elemento del input. Esto es nativo de Julia y sirve para cualquier
+funcion.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{Am} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{l+m+mi}{3}\PY{o}{*}\PY{n}{j} \PY{k}{for} \PY{n}{j} \PY{k+kp}{in} \PY{l+m+mi}{0}\PY{o}{:}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i} \PY{k+kp}{in} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 3×3 Array\{Int64,2\}:
+          1  2  3
+          4  5  6
+          7  8  9
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{f2}\PY{p}{(}\PY{n}{Am}\PY{p}{)}  \PY{c}{\PYZsh{}Esto seria A\PYZca{}2 = A*A}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 3×3 Array\{Int64,2\}:
+           30   36   42
+           66   81   96
+          102  126  150
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{f2}\PY{o}{.}\PY{p}{(}\PY{n}{Am}\PY{p}{)} \PY{c}{\PYZsh{}Esto en cambio aplica x\PYZca{}2 a cada elemento de la matriz}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 3×3 Array\{Int64,2\}:
+           1   4   9
+          16  25  36
+          49  64  81
+\end{Verbatim}
+            
+    \subsubsection{Multiple Dispatch}\label{multiple-dispatch}
+
+rapido, extensible, proglamable facilmente
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c}{\PYZsh{}Para entender el despacho multiple en Julia, observemos el operador +}
+         \PY{c}{\PYZsh{}Si llamamos a la funcion methods() sobre +, podemos ver todas las definiciones de +}
+         \PY{n}{methods}\PY{p}{(}\PY{o}{+}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} \# 180 methods for generic function "+":
+         +(x::Bool, z::Complex\{Bool\}) in Base at complex.jl:232
+         +(x::Bool, y::Bool) in Base at bool.jl:89
+         +(x::Bool) in Base at bool.jl:86
+         +(x::Bool, y::T) where T<:AbstractFloat in Base at bool.jl:96
+         +(x::Bool, z::Complex) in Base at complex.jl:239
+         +(a::Float16, b::Float16) in Base at float.jl:372
+         +(x::Float32, y::Float32) in Base at float.jl:374
+         +(x::Float64, y::Float64) in Base at float.jl:375
+         +(z::Complex\{Bool\}, x::Bool) in Base at complex.jl:233
+         +(z::Complex\{Bool\}, x::Real) in Base at complex.jl:247
+         +(x::Char, y::Integer) in Base at char.jl:40
+         +(c::BigInt, x::BigFloat) in Base.MPFR at mpfr.jl:312
+         +(a::BigInt, b::BigInt, c::BigInt, d::BigInt, e::BigInt) in Base.GMP at gmp.jl:334
+         +(a::BigInt, b::BigInt, c::BigInt, d::BigInt) in Base.GMP at gmp.jl:327
+         +(a::BigInt, b::BigInt, c::BigInt) in Base.GMP at gmp.jl:321
+         +(x::BigInt, y::BigInt) in Base.GMP at gmp.jl:289
+         +(x::BigInt, c::Union\{UInt16, UInt32, UInt64, UInt8\}) in Base.GMP at gmp.jl:346
+         +(x::BigInt, c::Union\{Int16, Int32, Int64, Int8\}) in Base.GMP at gmp.jl:362
+         +(a::BigFloat, b::BigFloat, c::BigFloat, d::BigFloat, e::BigFloat) in Base.MPFR at mpfr.jl:460
+         +(a::BigFloat, b::BigFloat, c::BigFloat, d::BigFloat) in Base.MPFR at mpfr.jl:453
+         +(a::BigFloat, b::BigFloat, c::BigFloat) in Base.MPFR at mpfr.jl:447
+         +(x::BigFloat, c::BigInt) in Base.MPFR at mpfr.jl:308
+         +(x::BigFloat, y::BigFloat) in Base.MPFR at mpfr.jl:277
+         +(x::BigFloat, c::Union\{UInt16, UInt32, UInt64, UInt8\}) in Base.MPFR at mpfr.jl:284
+         +(x::BigFloat, c::Union\{Int16, Int32, Int64, Int8\}) in Base.MPFR at mpfr.jl:292
+         +(x::BigFloat, c::Union\{Float16, Float32, Float64\}) in Base.MPFR at mpfr.jl:300
+         +(B::BitArray\{2\}, J::UniformScaling) in Base.LinAlg at linalg/uniformscaling.jl:59
+         +(a::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem, b::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem) in Base.Pkg.Resolve.VersionWeights at pkg/resolve/versionweight.jl:87
+         +(a::Base.Pkg.Resolve.VersionWeights.VWPreBuild, b::Base.Pkg.Resolve.VersionWeights.VWPreBuild) in Base.Pkg.Resolve.VersionWeights at pkg/resolve/versionweight.jl:129
+         +(a::Base.Pkg.Resolve.VersionWeights.VersionWeight, b::Base.Pkg.Resolve.VersionWeights.VersionWeight) in Base.Pkg.Resolve.VersionWeights at pkg/resolve/versionweight.jl:191
+         +(a::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue, b::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue) in Base.Pkg.Resolve.MaxSum.FieldValues at pkg/resolve/fieldvalue.jl:60
+         +(x::Base.Dates.CompoundPeriod, y::Base.Dates.CompoundPeriod) in Base.Dates at dates/periods.jl:349
+         +(x::Base.Dates.CompoundPeriod, y::Base.Dates.Period) in Base.Dates at dates/periods.jl:347
+         +(x::Base.Dates.CompoundPeriod, y::Base.Dates.TimeType) in Base.Dates at dates/periods.jl:387
+         +(x::Date, y::Base.Dates.Day) in Base.Dates at dates/arithmetic.jl:77
+         +(x::Date, y::Base.Dates.Week) in Base.Dates at dates/arithmetic.jl:75
+         +(dt::Date, z::Base.Dates.Month) in Base.Dates at dates/arithmetic.jl:58
+         +(dt::Date, y::Base.Dates.Year) in Base.Dates at dates/arithmetic.jl:32
+         +(dt::Date, t::Base.Dates.Time) in Base.Dates at dates/arithmetic.jl:20
+         +(t::Base.Dates.Time, dt::Date) in Base.Dates at dates/arithmetic.jl:24
+         +(x::Base.Dates.Time, y::Base.Dates.TimePeriod) in Base.Dates at dates/arithmetic.jl:81
+         +(dt::DateTime, z::Base.Dates.Month) in Base.Dates at dates/arithmetic.jl:52
+         +(dt::DateTime, y::Base.Dates.Year) in Base.Dates at dates/arithmetic.jl:28
+         +(x::DateTime, y::Base.Dates.Period) in Base.Dates at dates/arithmetic.jl:79
+         +(y::AbstractFloat, x::Bool) in Base at bool.jl:98
+         +(x::T, y::T) where T<:Union\{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8\} in Base at int.jl:32
+         +(x::Integer, y::Ptr) in Base at pointer.jl:128
+         +(z::Complex, w::Complex) in Base at complex.jl:221
+         +(z::Complex, x::Bool) in Base at complex.jl:240
+         +(x::Real, z::Complex\{Bool\}) in Base at complex.jl:246
+         +(x::Real, z::Complex) in Base at complex.jl:258
+         +(z::Complex, x::Real) in Base at complex.jl:259
+         +(x::Rational, y::Rational) in Base at rational.jl:245
+         +(x::Integer, y::Char) in Base at char.jl:41
+         +(i::Integer, index::CartesianIndex) in Base.IteratorsMD at multidimensional.jl:110
+         +(c::Union\{UInt16, UInt32, UInt64, UInt8\}, x::BigInt) in Base.GMP at gmp.jl:350
+         +(c::Union\{Int16, Int32, Int64, Int8\}, x::BigInt) in Base.GMP at gmp.jl:363
+         +(c::Union\{UInt16, UInt32, UInt64, UInt8\}, x::BigFloat) in Base.MPFR at mpfr.jl:288
+         +(c::Union\{Int16, Int32, Int64, Int8\}, x::BigFloat) in Base.MPFR at mpfr.jl:296
+         +(c::Union\{Float16, Float32, Float64\}, x::BigFloat) in Base.MPFR at mpfr.jl:304
+         +(x::Irrational, y::Irrational) in Base at irrationals.jl:109
+         +(x::Real, r::Base.Use\_StepRangeLen\_Instead) in Base at deprecated.jl:1232
+         +(x::Number) in Base at operators.jl:399
+         +(x::T, y::T) where T<:Number in Base at promotion.jl:335
+         +(x::Number, y::Number) in Base at promotion.jl:249
+         +(x::Real, r::AbstractUnitRange) in Base at range.jl:721
+         +(x::Number, r::AbstractUnitRange) in Base at range.jl:723
+         +(x::Number, r::StepRangeLen) in Base at range.jl:726
+         +(x::Number, r::LinSpace) in Base at range.jl:730
+         +(x::Number, r::Range) in Base at range.jl:724
+         +(r::Range, x::Number) in Base at range.jl:732
+         +(r1::OrdinalRange, r2::OrdinalRange) in Base at range.jl:882
+         +(r1::LinSpace\{T\}, r2::LinSpace\{T\}) where T in Base at range.jl:889
+         +(r1::StepRangeLen\{T,R,S\} where S, r2::StepRangeLen\{T,R,S\} where S) where \{R<:Base.TwicePrecision, T\} in Base at twiceprecision.jl:300
+         +(r1::StepRangeLen\{T,S,S\} where S, r2::StepRangeLen\{T,S,S\} where S) where \{T, S\} in Base at range.jl:905
+         +(r1::Union\{LinSpace, OrdinalRange, StepRangeLen\}, r2::Union\{LinSpace, OrdinalRange, StepRangeLen\}) in Base at range.jl:897
+         +(x::Base.TwicePrecision, y::Number) in Base at twiceprecision.jl:455
+         +(x::Number, y::Base.TwicePrecision) in Base at twiceprecision.jl:458
+         +(x::Base.TwicePrecision\{T\}, y::Base.TwicePrecision\{T\}) where T in Base at twiceprecision.jl:461
+         +(x::Base.TwicePrecision, y::Base.TwicePrecision) in Base at twiceprecision.jl:465
+         +(x::Ptr, y::Integer) in Base at pointer.jl:126
+         +(A::BitArray, B::BitArray) in Base at bitarray.jl:1177
+         +(A::SymTridiagonal, B::SymTridiagonal) in Base.LinAlg at linalg/tridiag.jl:128
+         +(A::Tridiagonal, B::Tridiagonal) in Base.LinAlg at linalg/tridiag.jl:629
+         +(A::UpperTriangular, B::UpperTriangular) in Base.LinAlg at linalg/triangular.jl:419
+         +(A::LowerTriangular, B::LowerTriangular) in Base.LinAlg at linalg/triangular.jl:420
+         +(A::UpperTriangular, B::Base.LinAlg.UnitUpperTriangular) in Base.LinAlg at linalg/triangular.jl:421
+         +(A::LowerTriangular, B::Base.LinAlg.UnitLowerTriangular) in Base.LinAlg at linalg/triangular.jl:422
+         +(A::Base.LinAlg.UnitUpperTriangular, B::UpperTriangular) in Base.LinAlg at linalg/triangular.jl:423
+         +(A::Base.LinAlg.UnitLowerTriangular, B::LowerTriangular) in Base.LinAlg at linalg/triangular.jl:424
+         +(A::Base.LinAlg.UnitUpperTriangular, B::Base.LinAlg.UnitUpperTriangular) in Base.LinAlg at linalg/triangular.jl:425
+         +(A::Base.LinAlg.UnitLowerTriangular, B::Base.LinAlg.UnitLowerTriangular) in Base.LinAlg at linalg/triangular.jl:426
+         +(A::Base.LinAlg.AbstractTriangular, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg/triangular.jl:427
+         +(A::Symmetric, x::Bool) in Base.LinAlg at linalg/symmetric.jl:274
+         +(A::Symmetric, x::Number) in Base.LinAlg at linalg/symmetric.jl:276
+         +(A::Hermitian, x::Bool) in Base.LinAlg at linalg/symmetric.jl:274
+         +(A::Hermitian, x::Real) in Base.LinAlg at linalg/symmetric.jl:276
+         +(Da::Diagonal, Db::Diagonal) in Base.LinAlg at linalg/diagonal.jl:140
+         +(A::Bidiagonal, B::Bidiagonal) in Base.LinAlg at linalg/bidiag.jl:330
+         +(UL::UpperTriangular, J::UniformScaling) in Base.LinAlg at linalg/uniformscaling.jl:72
+         +(UL::Base.LinAlg.UnitUpperTriangular, J::UniformScaling) in Base.LinAlg at linalg/uniformscaling.jl:75
+         +(UL::LowerTriangular, J::UniformScaling) in Base.LinAlg at linalg/uniformscaling.jl:72
+         +(UL::Base.LinAlg.UnitLowerTriangular, J::UniformScaling) in Base.LinAlg at linalg/uniformscaling.jl:75
+         +(A::Array, B::SparseMatrixCSC) in Base.SparseArrays at sparse/sparsematrix.jl:1541
+         +(x::Union\{Base.ReshapedArray\{T,1,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{T,1\}, SubArray\{T,1,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where T, y::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv) in Base.SparseArrays at sparse/sparsevector.jl:1340
+         +(x::Union\{Base.ReshapedArray\{\#s268,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s268,N\}, SubArray\{\#s268,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s268<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/periods.jl:358
+         +(A::SparseMatrixCSC, J::UniformScaling) in Base.SparseArrays at sparse/sparsematrix.jl:3608
+         +(A::AbstractArray\{TA,2\}, J::UniformScaling\{TJ\}) where \{TA, TJ\} in Base.LinAlg at linalg/uniformscaling.jl:119
+         +(A::Diagonal, B::Bidiagonal) in Base.LinAlg at linalg/special.jl:113
+         +(A::Bidiagonal, B::Diagonal) in Base.LinAlg at linalg/special.jl:114
+         +(A::Diagonal, B::Tridiagonal) in Base.LinAlg at linalg/special.jl:113
+         +(A::Tridiagonal, B::Diagonal) in Base.LinAlg at linalg/special.jl:114
+         +(A::Diagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg/special.jl:113
+         +(A::Array\{T,2\} where T, B::Diagonal) in Base.LinAlg at linalg/special.jl:114
+         +(A::Bidiagonal, B::Tridiagonal) in Base.LinAlg at linalg/special.jl:113
+         +(A::Tridiagonal, B::Bidiagonal) in Base.LinAlg at linalg/special.jl:114
+         +(A::Bidiagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg/special.jl:113
+         +(A::Array\{T,2\} where T, B::Bidiagonal) in Base.LinAlg at linalg/special.jl:114
+         +(A::Tridiagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg/special.jl:113
+         +(A::Array\{T,2\} where T, B::Tridiagonal) in Base.LinAlg at linalg/special.jl:114
+         +(A::SymTridiagonal, B::Tridiagonal) in Base.LinAlg at linalg/special.jl:122
+         +(A::Tridiagonal, B::SymTridiagonal) in Base.LinAlg at linalg/special.jl:123
+         +(A::SymTridiagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg/special.jl:122
+         +(A::Array\{T,2\} where T, B::SymTridiagonal) in Base.LinAlg at linalg/special.jl:123
+         +(A::Diagonal, B::SymTridiagonal) in Base.LinAlg at linalg/special.jl:131
+         +(A::SymTridiagonal, B::Diagonal) in Base.LinAlg at linalg/special.jl:132
+         +(A::Bidiagonal, B::SymTridiagonal) in Base.LinAlg at linalg/special.jl:131
+         +(A::SymTridiagonal, B::Bidiagonal) in Base.LinAlg at linalg/special.jl:132
+         +(A::Diagonal, B::UpperTriangular) in Base.LinAlg at linalg/special.jl:143
+         +(A::UpperTriangular, B::Diagonal) in Base.LinAlg at linalg/special.jl:144
+         +(A::Diagonal, B::Base.LinAlg.UnitUpperTriangular) in Base.LinAlg at linalg/special.jl:143
+         +(A::Base.LinAlg.UnitUpperTriangular, B::Diagonal) in Base.LinAlg at linalg/special.jl:144
+         +(A::Diagonal, B::LowerTriangular) in Base.LinAlg at linalg/special.jl:143
+         +(A::LowerTriangular, B::Diagonal) in Base.LinAlg at linalg/special.jl:144
+         +(A::Diagonal, B::Base.LinAlg.UnitLowerTriangular) in Base.LinAlg at linalg/special.jl:143
+         +(A::Base.LinAlg.UnitLowerTriangular, B::Diagonal) in Base.LinAlg at linalg/special.jl:144
+         +(A::Base.LinAlg.AbstractTriangular, B::SymTridiagonal) in Base.LinAlg at linalg/special.jl:150
+         +(A::SymTridiagonal, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg/special.jl:151
+         +(A::Base.LinAlg.AbstractTriangular, B::Tridiagonal) in Base.LinAlg at linalg/special.jl:150
+         +(A::Tridiagonal, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg/special.jl:151
+         +(A::Base.LinAlg.AbstractTriangular, B::Bidiagonal) in Base.LinAlg at linalg/special.jl:150
+         +(A::Bidiagonal, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg/special.jl:151
+         +(A::Base.LinAlg.AbstractTriangular, B::Array\{T,2\} where T) in Base.LinAlg at linalg/special.jl:150
+         +(A::Array\{T,2\} where T, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg/special.jl:151
+         +(Y::Union\{Base.ReshapedArray\{\#s267,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s267,N\}, SubArray\{\#s267,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s267<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, x::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/periods.jl:363
+         +(X::Union\{Base.ReshapedArray\{\#s266,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s266,N\}, SubArray\{\#s266,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s266<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, Y::Union\{Base.ReshapedArray\{\#s265,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s265,N\}, SubArray\{\#s265,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s265<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/periods.jl:364
+         +(x::Union\{Base.ReshapedArray\{\#s268,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s268,N\}, SubArray\{\#s268,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s268<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, y::Base.Dates.TimeType) in Base.Dates at dates/arithmetic.jl:86
+         +(r::Range\{\#s268\} where \#s268<:Base.Dates.TimeType, x::Base.Dates.Period) in Base.Dates at dates/ranges.jl:47
+         +(A::SparseMatrixCSC, B::SparseMatrixCSC) in Base.SparseArrays at sparse/sparsematrix.jl:1537
+         +(A::SparseMatrixCSC, B::Array) in Base.SparseArrays at sparse/sparsematrix.jl:1540
+         +(x::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv, y::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv) in Base.SparseArrays at sparse/sparsevector.jl:1339
+         +(x::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv, y::Union\{Base.ReshapedArray\{T,1,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{T,1\}, SubArray\{T,1,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where T) in Base.SparseArrays at sparse/sparsevector.jl:1341
+         +(x::AbstractArray\{\#s45,N\} where N where \#s45<:Number) in Base at abstractarraymath.jl:95
+         +(A::AbstractArray, B::AbstractArray) in Base at arraymath.jl:38
+         +(A::Number, B::AbstractArray) in Base at arraymath.jl:45
+         +(A::AbstractArray, B::Number) in Base at arraymath.jl:48
+         +(index1::CartesianIndex\{N\}, index2::CartesianIndex\{N\}) where N in Base.IteratorsMD at multidimensional.jl:101
+         +(index::CartesianIndex\{N\}, i::Integer) where N in Base.IteratorsMD at multidimensional.jl:111
+         +(J1::UniformScaling, J2::UniformScaling) in Base.LinAlg at linalg/uniformscaling.jl:58
+         +(J::UniformScaling, B::BitArray\{2\}) in Base.LinAlg at linalg/uniformscaling.jl:60
+         +(J::UniformScaling, A::AbstractArray\{T,2\} where T) in Base.LinAlg at linalg/uniformscaling.jl:61
+         +(a::Base.Pkg.Resolve.VersionWeights.HierarchicalValue\{T\}, b::Base.Pkg.Resolve.VersionWeights.HierarchicalValue\{T\}) where T in Base.Pkg.Resolve.VersionWeights at pkg/resolve/versionweight.jl:23
+         +(x::P, y::P) where P<:Base.Dates.Period in Base.Dates at dates/periods.jl:70
+         +(x::Base.Dates.Period, y::Base.Dates.Period) in Base.Dates at dates/periods.jl:346
+         +(y::Base.Dates.Period, x::Base.Dates.CompoundPeriod) in Base.Dates at dates/periods.jl:348
+         +(x::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/periods.jl:357
+         +(x::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, Y::Union\{Base.ReshapedArray\{\#s268,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s268,N\}, SubArray\{\#s268,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s268<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/periods.jl:362
+         +(x::Base.Dates.TimeType) in Base.Dates at dates/arithmetic.jl:8
+         +(a::Base.Dates.TimeType, b::Base.Dates.Period, c::Base.Dates.Period) in Base.Dates at dates/periods.jl:378
+         +(a::Base.Dates.TimeType, b::Base.Dates.Period, c::Base.Dates.Period, d::Base.Dates.Period{\ldots}) in Base.Dates at dates/periods.jl:379
+         +(x::Base.Dates.TimeType, y::Base.Dates.CompoundPeriod) in Base.Dates at dates/periods.jl:382
+         +(x::Base.Dates.Instant) in Base.Dates at dates/arithmetic.jl:4
+         +(y::Base.Dates.Period, x::Base.Dates.TimeType) in Base.Dates at dates/arithmetic.jl:83
+         +(x::AbstractArray\{\#s268,N\} where N where \#s268<:Base.Dates.TimeType, y::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/arithmetic.jl:85
+         +(x::Base.Dates.Period, r::Range\{\#s268\} where \#s268<:Base.Dates.TimeType) in Base.Dates at dates/ranges.jl:46
+         +(y::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, x::AbstractArray\{\#s268,N\} where N where \#s268<:Base.Dates.TimeType) in Base.Dates at dates/arithmetic.jl:87
+         +(y::Base.Dates.TimeType, x::Union\{Base.ReshapedArray\{\#s268,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\}, DenseArray\{\#s268,N\}, SubArray\{\#s268,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:Union\{DenseArray, SubArray\{T,N,P,I,true\} where I<:Tuple\{Union\{Base.Slice, UnitRange\},Vararg\{Any,N\} where N\} where P where N where T\} where N where T, DenseArray\} where N where \#s268<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates/arithmetic.jl:88
+         +(J::UniformScaling, x::Number) in Base at deprecated.jl:56
+         +(x::Number, J::UniformScaling) in Base at deprecated.jl:56
+         +(a, b, c, xs{\ldots}) in Base at operators.jl:424
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c}{\PYZsh{}Podemos definir mas metodos. Para esto primero tenemos que importar + de Base}
+         \PY{k}{import} \PY{n}{Base}\PY{o}{:} \PY{o}{+}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c}{\PYZsh{}Por ejemplo si queremos concatenar elementos con +. Sin extender el metodo, no funciona. (No esta entre esos 180 anteriores)}
+         \PY{o}{+}\PY{p}{(}\PY{n}{x}\PY{o}{::}\PY{n}{String}\PY{p}{,} \PY{n}{y}\PY{o}{::}\PY{n}{String}\PY{p}{)} \PY{o}{=} \PY{n}{string}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} + (generic function with 181 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{l+s}{\PYZdq{}}\PY{l+s}{H}\PY{l+s}{e}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{\PYZdq{}} \PY{o}{+} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{w}\PY{l+s}{o}\PY{l+s}{r}\PY{l+s}{l}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} "Helloworld!"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c}{\PYZsh{}Un ejemplo mas complejo}
+         \PY{n}{foo}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{o}{=} \PY{n}{println}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{d}\PY{l+s}{u}\PY{l+s}{c}\PY{l+s}{k}\PY{l+s}{\PYZhy{}}\PY{l+s}{t}\PY{l+s}{y}\PY{l+s}{p}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{f}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{foo}\PY{p}{(}\PY{n}{x}\PY{o}{::}\PY{k+kt}{Int}\PY{p}{,} \PY{n}{y}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{)} \PY{o}{=} \PY{n}{println}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{ }\PY{l+s}{c}\PY{l+s}{o}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{e}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{o}\PY{l+s}{ }\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{f}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{foo}\PY{p}{(}\PY{n}{x}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{,} \PY{n}{y}\PY{o}{::}\PY{k+kt}{Float64}\PY{p}{)} \PY{o}{=} \PY{n}{println}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{ }\PY{l+s}{c}\PY{l+s}{o}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{o}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{f}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{foo}\PY{p}{(}\PY{n}{x}\PY{o}{::}\PY{k+kt}{Int}\PY{p}{,} \PY{n}{y}\PY{o}{::}\PY{k+kt}{Int}\PY{p}{)} \PY{o}{=} \PY{n}{println}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{f}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{ }\PY{l+s}{c}\PY{l+s}{o}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{o}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{e}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{o}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} foo (generic function with 4 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{foo}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foo con dos enteros
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{foo}\PY{p}{(}\PY{l+m+mf}{1.} \PY{p}{,} \PY{l+m+mf}{1.}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foo con dos flotantes!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{foo}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+foo con entero y flotante!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{foo}\PY{p}{(}\PY{k+kc}{true}\PY{p}{,} \PY{k+kc}{false}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+duck-typed foo!
+
+    \end{Verbatim}
+
+    \subsection{Paradigmas que soporta}\label{paradigmas-que-soporta}
+
+\subsubsection{Funcional}\label{funcional}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{map}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}} \PY{n}{x}\PY{o}{\PYZca{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 5-element Array\{Int64,1\}:
+            1
+            8
+           27
+           64
+          125
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{filter}\PY{p}{(}\PY{n}{isprime}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 15-element Array\{Int64,1\}:
+          2
+          3
+          5
+          7
+         11
+         13
+         17
+         19
+         23
+         29
+         31
+         37
+         41
+         43
+         47
+\end{Verbatim}
+            
+    \subsubsection{Orientado a objetos}\label{orientado-a-objetos}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{type} \PY{n}{Tigre}
+           \PY{n}{largo\PYZus{}de\PYZus{}cola}\PY{o}{::}\PY{k+kt}{Float64}
+           \PY{n}{color\PYZus{}de\PYZus{}pelaje}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{abstract} \PY{n}{Felino} \PY{c}{\PYZsh{} Declaramos una clase abstracta sin comportamiento}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{type} \PY{n}{Pantera} \PY{o}{\PYZlt{}:} \PY{n}{Felino} \PY{c}{\PYZsh{} Panther is also a subtype of Cat}
+             \PY{n}{color\PYZus{}de\PYZus{}ojos}
+             \PY{n}{color\PYZus{}de\PYZus{}pelaje}
+           \PY{n}{Pantera}\PY{p}{(}\PY{p}{)} \PY{o}{=} \PY{n}{new}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{v}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{d}\PY{l+s}{e}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{n}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{r}\PY{l+s}{o}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{type} \PY{n}{Leon} \PY{o}{\PYZlt{}:} \PY{n}{Felino} \PY{c}{\PYZsh{} Lion is a subtype of Cat}
+           \PY{n}{color\PYZus{}de\PYZus{}melena}
+           \PY{n}{roar}\PY{o}{::}\PY{k+kt}{AbstractString}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{tigger} \PY{o}{=} \PY{n}{Tigre}\PY{p}{(}\PY{l+m+mf}{3.5}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{n}\PY{l+s}{a}\PY{l+s}{r}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{j}\PY{l+s}{a}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} Tigre(3.5,"naranja")
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{function} \PY{n}{meow}\PY{p}{(}\PY{n}{animal}\PY{o}{::}\PY{n}{Leon}\PY{p}{)}
+           \PY{n}{animal}\PY{o}{.}\PY{n}{roar}
+         \PY{k}{end}
+         
+         \PY{k}{function} \PY{n}{meow}\PY{p}{(}\PY{n}{animal}\PY{o}{::}\PY{n}{Pantera}\PY{p}{)}
+           \PY{l+s}{\PYZdq{}}\PY{l+s}{g}\PY{l+s}{r}\PY{l+s}{r}\PY{l+s}{r}\PY{l+s}{\PYZdq{}}
+         \PY{k}{end}
+         
+         \PY{k}{function} \PY{n}{meow}\PY{p}{(}\PY{n}{animal}\PY{o}{::}\PY{n}{Tigre}\PY{p}{)}
+           \PY{l+s}{\PYZdq{}}\PY{l+s}{r}\PY{l+s}{a}\PY{l+s}{w}\PY{l+s}{w}\PY{l+s}{w}\PY{l+s}{r}\PY{l+s}{\PYZdq{}}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} meow (generic function with 3 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{meow}\PY{p}{(}\PY{n}{tigger}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} "rawwwr"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{meow}\PY{p}{(}\PY{n}{Leon}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{m}\PY{l+s}{a}\PY{l+s}{r}\PY{l+s}{r}\PY{l+s}{ó}\PY{l+s}{n}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{R}\PY{l+s}{O}\PY{l+s}{A}\PY{l+s}{A}\PY{l+s}{R}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} "ROAAR"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{meow}\PY{p}{(}\PY{n}{Pantera}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} "grrr"
+\end{Verbatim}
+            
+    \section{Caracteristicas avanzadas del
+lenguaje}\label{caracteristicas-avanzadas-del-lenguaje}
+
+    Diseñado para paralelismo y computción distribuida
+
+Corutinas también llamadas: Lightweight threading
+
+Macros parecidos a los de Lisp y otras facilidades para metaprogramacion
+
+Acepta multiple dispach
+
+    \section{Paralelismo}\label{paralelismo}
+
+    \begin{itemize}
+\item
+  El paralelismo en Julia se hace por CPU, no GPU.
+\item
+  Los procesos se llaman Workers con un ID específico.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{println}\PY{p}{(}\PY{n}{nprocs}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{addprocs}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{nprocs}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+2
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{for} \PY{n}{w} \PY{k+kp}{in} \PY{n}{workers}\PY{p}{(}\PY{p}{)}
+            \PY{n}{rref}\PY{o}{=}\PY{n}{remotecall}\PY{p}{(}\PY{n}{myid}\PY{p}{,} \PY{n}{w}\PY{p}{)}
+            \PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{println}\PY{p}{(}\PY{n}{fetch}\PY{p}{(}\PY{n}{rref}\PY{p}{)}\PY{p}{)}
+        \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nd}{@everywhere} \PY{k}{function} \PY{n}{random\PYZus{}num}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{c}\PY{o}{::}\PY{k+kt}{Int} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{:}\PY{n}{n}
+                 \PY{n}{c} \PY{o}{+=} \PY{n}{rand}\PY{p}{(}\PY{k+kt}{Bool}\PY{p}{)}
+             \PY{k}{end}
+             \PY{n}{c}
+         \PY{k}{end}
+         
+         \PY{n}{a} \PY{o}{=} \PY{n+nd}{@spawn} \PY{n}{random\PYZus{}num}\PY{p}{(}\PY{l+m+mi}{100000000}\PY{p}{)}
+         
+         \PY{n}{b} \PY{o}{=} \PY{n+nd}{@spawn} \PY{n}{random\PYZus{}num}\PY{p}{(}\PY{l+m+mi}{10000000}\PY{p}{)}
+         
+         \PY{n}{println}\PY{p}{(}\PY{n}{fetch}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{+}\PY{n}{fetch}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{}reducción}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+55002896
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c}{\PYZsh{} Se genera la lista de tasks}
+         \PY{n}{t} \PY{o}{=} \PY{n+nd}{@task} \PY{k+kt}{Any}\PY{p}{[} \PY{k}{for} \PY{n}{x} \PY{k+kp}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]} \PY{n}{println}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{end} \PY{p}{]}
+         
+         \PY{c}{\PYZsh{} No hay tasks?}
+         \PY{n}{println}\PY{p}{(}\PY{n}{istaskdone}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{} Cual es la siguiente task?}
+         \PY{n}{println}\PY{p}{(}\PY{n}{current\PYZus{}task}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{} Ejecutar task}
+         \PY{n}{println}\PY{p}{(}\PY{n}{consume}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+false
+Task (runnable) @0x00007fb443677490
+1
+2
+4
+Any[nothing]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{c1} \PY{o}{=} \PY{k+kt}{Channel}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{)}
+        \PY{n}{put!}\PY{p}{(}\PY{n}{c1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{put!}\PY{p}{(}\PY{n}{c1}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{c2} \PY{o}{=} \PY{k+kt}{Channel}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{)}
+        
+        \PY{c}{\PYZsh{} foo() lee un item de c1, lo imprime y lo escribe en c2}
+        \PY{k}{function} \PY{n}{foo}\PY{p}{(}\PY{p}{)}
+            \PY{k}{while} \PY{k+kc}{true}
+                \PY{n}{data} \PY{o}{=} \PY{n}{take!}\PY{p}{(}\PY{n}{c1}\PY{p}{)}
+                \PY{n}{println}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                \PY{n}{result} \PY{o}{=} \PY{n}{data} \PY{o}{+} \PY{l+m+mi}{2}
+                \PY{n}{put!}\PY{p}{(}\PY{n}{c2}\PY{p}{,} \PY{n}{result}\PY{p}{)}   
+            \PY{k}{end}
+        \PY{k}{end}
+        
+        \PY{c}{\PYZsh{} con @schedule podemos hacer que varias instancias de foo() estén activas concurrentemente.}
+        \PY{k}{for} \PY{n}{i} \PY{k+kp}{in} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}
+            \PY{n+nd}{@schedule} \PY{n}{foo}\PY{p}{(}\PY{p}{)}
+        \PY{k}{end}
+        
+        \PY{k}{for} \PY{n}{i} \PY{k+kp}{in} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{3}
+            \PY{n}{data}\PY{o}{=} \PY{n}{take!}\PY{p}{(}\PY{n}{c2}\PY{p}{)}
+            \PY{n}{println}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+3
+4
+5
+6
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{c} \PY{o}{=} \PY{k+kt}{Channel}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{n}{task} \PY{o}{=} \PY{n+nd}{@schedule} \PY{n}{foreach}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{o}{\PYZgt{}}\PY{n}{put!}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{4}\PY{p}{)}
+        
+        \PY{n}{bind}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{task}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{k+kp}{in} \PY{n}{c}
+            \PY{n+nd}{@show} \PY{n}{i}
+        \PY{k}{end}
+        
+        \PY{n}{isopen}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+i = 1
+i = 2
+i = 3
+i = 4
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} false
+\end{Verbatim}
+            
+    \subsubsection{Machine Learning}\label{machine-learning}
+
+\paragraph{KMeans: se inicializan k-centroides y se asigna a cada punto
+del set de datos el centroide más cercano. Se recalculan los centroides
+como promedio de todos los puntos y se repite hasta lograr la
+convergencia.}\label{kmeans-se-inicializan-k-centroides-y-se-asigna-a-cada-punto-del-set-de-datos-el-centroide-muxe1s-cercano.-se-recalculan-los-centroides-como-promedio-de-todos-los-puntos-y-se-repite-hasta-lograr-la-convergencia.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{using} \PY{n}{RDatasets}
+        \PY{n}{xclara} \PY{o}{=} \PY{n}{dataset}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{c}\PY{l+s}{l}\PY{l+s}{u}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{x}\PY{l+s}{c}\PY{l+s}{l}\PY{l+s}{a}\PY{l+s}{r}\PY{l+s}{a}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{size}\PY{p}{(}\PY{n}{xclara}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Aca tambien es necesario tener plotly: pip install plotly}
+        \PY{c}{\PYZsh{} y Pkg.add(\PYZdq{}PyPlot\PYZdq{})}
+        
+        \PY{n}{x} \PY{o}{=} \PY{n}{xclara}\PY{p}{[}\PY{o}{:}\PY{n}{V1}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{xclara}\PY{p}{[}\PY{o}{:}\PY{n}{V2}\PY{p}{]}
+        \PY{k}{using} \PY{n}{Plots}
+        \PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{using} \PY{n}{Clustering}
+        
+        \PY{n}{xclara} \PY{o}{=} \PY{n}{convert}\PY{p}{(}\PY{k+kt}{Array}\PY{p}{,} \PY{n}{xclara}\PY{p}{)}
+        \PY{n}{xclara} \PY{o}{=} \PY{n}{xclara}\PY{o}{\PYZsq{}}
+        \PY{c}{\PYZsh{}xclara\PYZus{}kmeans = kmeans(Float64.(xclara), 3)}
+        \PY{n}{xclara\PYZus{}kmeans} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{xclara}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{DBSCAN: otro algoritmo de clustering. Este no recibe la
+cantidad de clusters como hiperparámetro y tiene la capacidad de manejar
+mejor los puntos entre
+clusters}\label{dbscan-otro-algoritmo-de-clustering.-este-no-recibe-la-cantidad-de-clusters-como-hiperparuxe1metro-y-tiene-la-capacidad-de-manejar-mejor-los-puntos-entre-clusters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{using} \PY{n}{Distances}
+         \PY{n}{dclara} \PY{o}{=} \PY{n}{pairwise}\PY{p}{(}\PY{n}{SqEuclidean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{xclara}\PY{p}{)}\PY{p}{;}
+         \PY{c}{\PYZsh{} parametros: matriz de distancias, el radio de un cluster, }
+         \PY{c}{\PYZsh{} mínimo número de puntos que forman un cluster}
+         
+         \PY{n}{xclara\PYZus{}dbscan} \PY{o}{=} \PY{n}{dbscan}\PY{p}{(}\PY{n}{dclara}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}\PY{p}{;}
+         \PY{c}{\PYZsh{} devuelve cantidad de puntos para cada cluster encontrado}
+         \PY{n}{xclara\PYZus{}dbscan}\PY{o}{.}\PY{n}{counts}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        UndefVarError: xclara not defined
+
+        
+
+    \end{Verbatim}
+
+    \paragraph{KNN}\label{knn}
+
+    \section{Estadisticas}\label{estadisticas}
+
+    Index TIOBE Mayo 2018
+
+    Populridad en Githut en 2018
+
+    Popularidad de lenguajes en ofertas laborales en cuanto a machine
+learning o data science en 2016
+
+    Pero cuando cambiamos a la popularidad relativa.
+
+    \section{Comparacion otros lenguajes}\label{comparacion-otros-lenguajes}
+
+    Julia vs Python
+
+Ventajas de Juila:
+
+\begin{itemize}
+\item
+  Rápido por default.
+\item
+  Sintaxis amigable para matemáticas.
+\item
+  No se pierde el manejo automatico de memoria.
+\item
+  Paralelismo.
+\end{itemize}
+
+    Ventajas de Python:
+
+\begin{itemize}
+\item
+  Los arrays de Julia son indexados a partir del 1.
+\item
+  Julia todavía es un lenguaje muy nuevo.
+\item
+  Python tiene más paquetes creados para el lenguaje.
+\item
+  Python tiene una comunidad más grande.
+\end{itemize}
+
+    \paragraph{Comparación con Python: cálculo de la traza de una matriz de
+10mil x
+10mil}\label{comparaciuxf3n-con-python-cuxe1lculo-de-la-traza-de-una-matriz-de-10mil-x-10mil}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c}{\PYZsh{} Ojo cuando corran esto. Puede que se rompa todo. Capaz lo mejor}
+        \PY{c}{\PYZsh{} sea llevarlo ya resuelto en una imagen}
+        \PY{k}{using} \PY{n}{Distributions}
+        \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10000}
+        \PY{n}{matrix} \PY{o}{=} \PY{n}{rand}\PY{p}{(}\PY{n}{Uniform}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{)}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+        \PY{k}{for} \PY{n}{i} \PY{k+kp}{in} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{:}\PY{l+m+mi}{100}\PY{p}{]}
+            \PY{n}{tic}\PY{p}{(}\PY{p}{)}
+            \PY{n}{trace}\PY{p}{(}\PY{n}{matrix}\PY{p}{)}
+            \PY{n}{aux} \PY{o}{=} \PY{n}{toq}\PY{p}{(}\PY{p}{)}
+            \PY{n}{n} \PY{o}{=} \PY{n}{n} \PY{o}{+} \PY{n}{aux}
+        \PY{k}{end}
+        
+        \PY{n}{n}\PY{o}{/}\PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+    Python:
+
+    \section{Casos de estudios}\label{casos-de-estudios}
+
+    En 2015, el banco de reserva federal de nueva york uso julia para hacer
+modelos de la economía de los estados unidos.
+
+Notaron que el modelo hecho con el lenguaje era 10 veces más rapido que
+el anterior (hecho con MATLAB) dado por:
+
+\begin{itemize}
+\item
+  Un sistema flexible y potente que proporciona una forma natural de
+  estructurar y simplificar la base de código.
+\item
+  Multiple dispatch, lo que les permitió escribir un código más
+  genérico.
+\item
+  Un potente compilador que aumentó el rendimiento.
+\end{itemize}
+
+    El proyecto Celste que cataloga estrellas y galaxias en el Apache Point
+Observatory de Nevo Mexico logró un gran numero de hitos:
+
+\begin{itemize}
+\item
+  Logró rendimiento pico de 1.54 petaFLOPS usando 1.3 millones de
+  threads.
+\item
+  Agregó \textasciitilde{}178 terabytes de datos en imagenes.
+\item
+  Produjo parametros estimados para 188 millones de estrellas y galaxias
+  en 14.6 minutos.
+\item
+  Proporcionó no solo estimaciones para las fuentes de luz sino que, por
+  primera vez proporcionó una medida de principios de la calidad de la
+  inferencia para cada fuente de luz.
+\end{itemize}
+
+    \section{Conclusion}\label{conclusion}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
