@@ -1,0 +1,12 @@
+declare
+X={NewCell 0} 
+{Assign X 5} 
+Y=X # Y refiere a la misma celda que X 
+{Assign Y 10} #Asignamos 10 a la celda de Y y también a la celda de X 
+{Browse {Access X} == 10} # True 
+{Browse X==Y} #True, refieren a la misma celda 
+Z={NewCell 10} #Ahora Z refiere a una *nueva* celda que tiene 10 
+
+{Browse Z==Y} #Falso, pues las celdas a las que refieren son distintas 
+
+{Browse @X==@Z} #Verdadero, las celdas almacenan el mismo valor 
