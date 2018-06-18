@@ -1,0 +1,31 @@
+Ejercicio 5.1:
+proc {Length Xs N}
+	case Xs of nil then
+		N = 0
+	[] X|Xr then
+		local N int in
+			{Length Xr Naux}
+			N = Naux + 1
+		end
+	end
+end
+
+Ejercicio 5.2:
+proc {LengthTail Xs N NTail}
+	case Xs of nil then
+		N = NTail
+	[] X|Xr then
+		{LengthTail Xs N NTail+1}
+	end
+end
+
+proc {Length Xs N}
+	{LengthTail Xs N 0}
+end
+
+
+La ventaja de usar "tail recursive" es que no se apila un nuevo frame en el stack al efectuar la llamada,
+sino que se utiliza el frame actual. De ésta manera el procesador puede efectuar el cálculo de manera más
+fácil y rápida.
+
+
