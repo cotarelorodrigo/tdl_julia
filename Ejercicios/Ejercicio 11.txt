@@ -1,0 +1,31 @@
+local Agente Puerto Canal PuertoValidado CanalValidado EnviarAPValidado EsLower in
+	proc {Agente S}
+		case S of H|T then
+			{Browse H}
+			{Agente T}
+		end
+	end
+	proc {EnviarAPValidado S Validar}
+		case S of H|T then
+			if {Validar H} then
+				{Send PuertoValidado H}
+			end
+			{EnviarAPValidado T Validar}
+		end
+	end
+	fun {EsLower X}
+		{Char.isLower X}
+	end
+	{NewPort CanalValidado PuertoValidado}
+	{NewPort Canal Puerto}
+	thread
+		{Agente CanalValidado}
+	end
+	thread
+		{EnviarAPValidado Canal EsLower}
+	end
+	{Send PuertoEntrada "a"}
+	{Send PuertoEntrada "b"}
+	{Send PuertoEntrada "c"}
+	{Send PuertoEntrada "A"}
+end

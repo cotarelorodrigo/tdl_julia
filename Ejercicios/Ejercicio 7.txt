@@ -1,0 +1,10 @@
+Local Max X Y in 
+	fun {Max X} 
+		fun {$ Y} 
+			If X>Y then X else Y end 
+		end 
+	end 
+	X = 16 
+	Y = 8 
+	{Browse {{Add X} Y}} 
+end 

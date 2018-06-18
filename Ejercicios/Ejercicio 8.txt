@@ -1,0 +1,23 @@
+Ejercicio 8.1
+
+local AsignarValor WaitSome S A B C D E S2 F in
+	proc {WaitSome Xs}
+		case Xs of H|T then
+			{WaitSome T}
+			{WaitOr H T}
+		end
+	end
+	proc {AsignarValor Xs}
+		Xs.2.2.2.2.2.1 = 3
+	end
+	S = [ A B C D E F]
+	thread
+		{Browse 'Esperando'}
+		{WaitSome S}
+		{Browse S}
+	end
+	thread
+		{AsignarValor S}
+		{Browse 'Valor asignado'}
+	end
+end

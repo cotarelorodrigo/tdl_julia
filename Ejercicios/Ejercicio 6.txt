@@ -1,0 +1,78 @@
+Ejercicio 6.1
+
+local FoldL L Suma in
+	fun {FoldL L F U}
+		{FoldLInt L F U U}
+	end
+	fun {FoldLInt L F U Ini}
+		case L
+		of nil then
+			{F U Ini}
+		[] H|T then
+			{FoldLInt T F {F U H} Ini}
+		end
+	end
+	fun {Suma X Y}
+		X + Y
+	end
+	L = [1 2 3 4 5 6]
+	{Browse {FoldL L Suma 0}}
+end
+local FoldR L Suma in
+	fun {FoldR L F U}
+		{FoldRInt L F U U}
+	end
+	fun {FoldRInt L F U Ini}
+		case L
+	of nil then
+		{F U Ini}
+	[] H|T then
+		{F U {FoldRInt T F H Ini}}
+	end
+	end
+	fun {Suma X Y}
+		X + Y
+	end
+	L = [1 2 3 4 5 6]
+	{Browse {FoldL L Suma 0}}
+end
+
+Ejercicio 6.2
+
+local Map L Cuadrado in
+	fun {Map L F}
+		case L
+		of nil then
+			L
+		[] H|T then
+			{F H} | {Map T F}
+		end
+	end
+	fun {Cuadrado X}
+		X * X
+	end
+	L = [1 2 3 4 5 6]
+	{Browse {Map L Cuadrado}}
+end
+
+Ejercicio 6.3:
+
+local Filter L Par in
+	fun {Filter L F}
+		case L
+		of nil then
+			L
+		[] H|T then
+			if {F H} then
+				H | {Filter T F}
+			else
+				{Filter T F}
+			end
+		end
+	end
+	fun {Par X}
+		X mod 2 == 0
+	end
+	L = [1 2 3 4 5 6]
+	{Browse {Filter L Par}}
+end

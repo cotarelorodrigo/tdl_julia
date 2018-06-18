@@ -1,0 +1,14 @@
+local Canal Puerto Mostrar in
+	proc {Mostrar S}
+		case S of H|T then
+			{Browse H} {Mostrar T}
+		end
+	end
+	{NewPort Canal Puerto}
+	thread
+		{Mostrar Canal}
+	end
+	{Send Puerto "Mensaje 1"}
+	{Send Puerto "Mensaje 2"}
+	{Send Puerto "Mensaje 3"}
+end

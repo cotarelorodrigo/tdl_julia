@@ -1,0 +1,55 @@
+local Test A B C D E F G H I J K L M in 
+	proc {Test X} 
+		case X 
+		of a|Z then {Browse 'case'(1)} 
+		[] f(a) then {Browse 'case'(2)} 
+		[] Y|Z andthen Y==Z then {Browse 'case'(3)} 
+		[] Y|Z then {Browse 'case'(4)} 
+		[] f(Y) then {Browse 'case'(5)} 
+		else {Browse 'case'(6)} end 
+	end 
+
+	A = [b c a] 
+	B = f(b(3)) 
+	C = f(a) 
+	D = f(a(3)) 
+	E = f(d) 
+	F = [a b c] 
+	G = [c a b] 
+	H = a|a 
+	I = '|'(v b) 
+	J = '|'(a a) 
+	K = '|'(b b) 
+	L = '|'(a b c) 
+	M = '|'(a [b c]) 
+
+	{Test A} 
+	{Test B} 
+	{Test C} 
+	{Test D} 
+	{Test E} 
+	{Test F} 
+	{Test G} 
+	{Test H} 
+	{Test I} 
+	{Test J} 
+	{Test K} 
+	{Test L} 
+	{Test M} 
+end 
+
+La ejecución
+
+'case'(4)
+'case'(5)
+'case'(2)
+'case'(5)
+'case'(5)
+'case'(1)
+'case'(4)
+'case'(1)
+'case'(4)
+'case'(1)
+'case'(3)
+'case'(6)
+'case'(1)
