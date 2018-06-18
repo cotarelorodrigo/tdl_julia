@@ -1,0 +1,29 @@
+Ejercicio 9.1
+
+local MyMap SquareLazy L Lout A B C in
+	MyMap = proc {$ Xs F Res}
+		case Xs of nil then
+			Res=nil
+		[] X|Xr then
+			local H T in
+				H = {F X}
+				T = {MyMap Xr F}
+				Res = H|T
+			end
+		end
+	end
+	SquareLazy = proc {$ X Res}
+		local Trigger in
+			Trigger = proc {$ Res}
+				Res = X*X
+			end
+			{ByNeed Trigger Res}
+		end
+	end
+	L = [1 2 3 4]
+	Lout = {MyMap L SquareLazy}
+	A = Lout.1
+	B = Lout.2.1
+	C = A + B
+	{Browse C}
+end
