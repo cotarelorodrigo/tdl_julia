@@ -6,5 +6,5 @@ Local Max X Y in
 	end 
 	X = 16 
 	Y = 8 
-	{Browse {{Add X} Y}} 
+	{Browse {{Max X} Y}} 
 end 
